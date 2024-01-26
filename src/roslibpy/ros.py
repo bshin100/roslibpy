@@ -34,10 +34,13 @@ class Ros(object):
         is_secure (:obj:`bool`): ``True`` to use a secure web sockets connection, otherwise ``False``.
     """
 
-    def __init__(self, host, port=None, is_secure=False):
+    def __init__(self, host, port=None, is_secure=False, ws_header=None):
         self._id_counter = 0
         url = RosBridgeClientFactory.create_url(host, port, is_secure)
-        self.factory = RosBridgeClientFactory(url)
+        if ws_header:
+            self.factory = RosBridgeClientFactory(url, headers=ws_header)
+        else:
+            self.factory = RosBridgeClientFactory(url)
         self.is_connecting = False
         self.connect()
 
