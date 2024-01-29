@@ -38,10 +38,7 @@ class Ros(object):
     def __init__(self, host, port=None, is_secure=False, ws_header=None):
         self._id_counter = 0
         url = RosBridgeClientFactory.create_url(host, port, is_secure)
-        if ws_header:
-            self.factory = RosBridgeClientFactory(url, headers=ws_header)
-        else:
-            self.factory = RosBridgeClientFactory(url)
+        self.factory = RosBridgeClientFactory(url, headers=ws_header)
         self.is_connecting = False
         self.connect()
 
